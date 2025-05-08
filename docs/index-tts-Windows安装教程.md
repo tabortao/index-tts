@@ -9,7 +9,7 @@ index-tts 是一个主要用于本地推理和部署的文本转语音（TTS）�
 **Micromamba**是[Mamba](https://mamba.readthedocs.io/en/latest/) 项目的一部分，它是Conda包管理器的一个轻量级、高效且快速的替代品。相比于传统的Conda，Micromamba提供了更小的安装体积和更快的性能，特别适合需要快速创建和管理虚拟环境的场景。
 
 ```bash
-# 安装micromamba
+# Powershell安装micromamba
 Invoke-Expression ((Invoke-WebRequest -Uri https://micro.mamba.pm/install.ps1 -UseBasicParsing).Content)
 # 软件会被安装到如下目录
 # 推荐修改，安装时候，可以自定义环境目录，如F:\Development\Python\micromamba
@@ -26,7 +26,7 @@ cd index-tts
 micromamba create -p F:\Code\TTS\index-tts\py312 python=3.12
 # micromamba create -n py312 python=3.12 -y
 # 激活指定路径的虚拟环境
-micromamba activate F:\Code\TTS\index-tts\py312
+micromamba activate F:\Code\index-tts\py312
 # micromamba activate py312
 
 # 安装依赖，使用阿里云镜像
