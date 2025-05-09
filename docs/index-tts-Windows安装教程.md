@@ -26,7 +26,7 @@ cd index-tts
 micromamba create -p F:\Code\TTS\index-tts\py312 python=3.12
 # micromamba create -n py312 python=3.12 -y
 # 激活指定路径的虚拟环境
-micromamba activate F:\Code\index-tts\py312
+micromamba activate F:\Code\TTS\index-tts\py312
 # micromamba activate py312
 
 # 安装依赖，使用阿里云镜像
@@ -37,16 +37,16 @@ pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --tru
 micromamba install -c conda-forge pynini==2.1.6
 pip install WeTextProcessing --no-deps --index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 安装PyTorch
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+# 安装PyTorch，需指定torch版本，减少兼容性错误
+pip3 install torch==2.6.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 
 # 提示可能缺少模块importlib_resources的话
 pip install importlib_resources==6.5.2 --index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 # micromamba导出项目依赖文件
-micromamba list -p F:\Code\TTS\index-tts\py312 --export > requirements.txt
+micromamba list -p F:\Code\TTS\index-tts\py312 --export > requirements2.txt
 # 或者conda兼容的导出项目依赖文件
-micromamba list -p F:\Code\TTS\index-tts\py312 --export | Select-String -NotMatch '^#' > requirements.txt
+micromamba list -p F:\Code\TTS\index-tts\py312 --export | Select-String -NotMatch '^#' > requirements3.txt
 
 # micromamba恢复环境
 micromamba create --name <new_env_name> --file requirements.txt
@@ -81,12 +81,26 @@ git clone https://hf-mirror.com/SparkAudio/Spark-TTS-0.5B pretrained_models/Spar
 
 - https://hf-mirror.com/IndexTeam/Index-TTS/tree/main
 
+## Command Line Tool
+```bash
+# Make sure pytorch has been installed before running this command
+pip install -e .
+indextts "大家好，我是一个超人！" --voice prompts/Lei.mp3 --model_dir checkpoints --config checkpoints/config.yaml --output output.wav
 
-## 运行模型
+# Use --help to see more options.
+indextts --help
+```
+
+
+## Web Demo
 
 ```bash
+
+pip install -e ".[webui]"
 python webui.py
+
 ```
+打开你的浏览器，访问 http://127.0.0.1:7860 查看演示。
 
 ## 使用技巧
 
