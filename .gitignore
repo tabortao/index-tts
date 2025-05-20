@@ -8,6 +8,9 @@ checkpoints/*.pth
 checkpoints/*.vocab
 checkpoints/*.model
 checkpoints/.cache
+checkpoints/Index-TTS/
+checkpoints/IndexTTS-1.5/
 outputs/
 build/
 py312/
+*.7z

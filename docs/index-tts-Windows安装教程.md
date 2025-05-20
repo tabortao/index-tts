@@ -54,32 +54,67 @@ micromamba create -p F:\Code\TTS\index-tts\py312 --file requirements.txt
 ```
 
 ## 下载模型
+### 方式一：Modelscope下载推荐方式
+安装Modelscope SDK
+```bash
+pip install modelscope --index-url https://pypi.tuna.tsinghua.edu.cn/simple
+```
+在index-tts文件夹新建download_model.py, 粘贴如下内容并运行`python download_model.py`:
 
-### 方式一：Python代码下载
-在Spark-TTS文件夹新建download_model.py, 粘贴如下内容并运行`python download_model.py`:
 ```python
-from huggingface_hub import snapshot_download
+from modelscope import snapshot_download
+snapshot_download('IndexTeam/IndexTTS-1.5', local_dir='checkpoints/IndexTTS-1.5')
+```
+使用Modelscope下载
+```bash
+python download_model.py
+```
 
-snapshot_download("SparkAudio/Spark-TTS-0.5B", local_dir="pretrained_models/Spark-TTS-0.5B")
+### 方式二：huggingface-cli下载
+
+```bash
+# 1.5版本模型
+huggingface-cli download IndexTeam/IndexTTS-1.5 \
+  config.yaml bigvgan_discriminator.pth bigvgan_generator.pth bpe.model dvae.pth gpt.pth unigram_12000.vocab \
+  --local-dir checkpoints
+# 1.0版本模型
+huggingface-cli download IndexTeam/Index-TTS \
+  bigvgan_discriminator.pth bigvgan_generator.pth bpe.model dvae.pth gpt.pth unigram_12000.vocab \
+  --local-dir checkpoints
 
 ```
 
-### 方式二：Git下载（推荐）
+### 方式三：weget下载
 
 ```bash
 mkdir -p pretrained_models
+# 1.5版本模型下载
+wget https://huggingface.co/IndexTeam/IndexTTS-1.5/resolve/main/bigvgan_discriminator.pth -P checkpoints
+wget https://huggingface.co/IndexTeam/IndexTTS-1.5/resolve/main/bigvgan_generator.pth -P checkpoints
+wget https://huggingface.co/IndexTeam/IndexTTS-1.5/resolve/main/bpe.model -P checkpoints
+wget https://huggingface.co/IndexTeam/IndexTTS-1.5/resolve/main/dvae.pth -P checkpoints
+wget https://huggingface.co/IndexTeam/IndexTTS-1.5/resolve/main/gpt.pth -P checkpoints
+wget https://huggingface.co/IndexTeam/IndexTTS-1.5/resolve/main/unigram_12000.vocab -P checkpoints
+wget https://huggingface.co/IndexTeam/IndexTTS-1.5/resolve/main/config.yaml -P checkpoints
 
+# 1.0版本模型下载
 # Make sure you have git-lfs installed (https://git-lfs.com)
-git lfs install
+wget https://huggingface.co/IndexTeam/Index-TTS/resolve/main/bigvgan_discriminator.pth -P checkpoints
+wget https://huggingface.co/IndexTeam/Index-TTS/resolve/main/bigvgan_generator.pth -P checkpoints
+wget https://huggingface.co/IndexTeam/Index-TTS/resolve/main/bpe.model -P checkpoints
+wget https://huggingface.co/IndexTeam/Index-TTS/resolve/main/dvae.pth -P checkpoints
+wget https://huggingface.co/IndexTeam/Index-TTS/resolve/main/gpt.pth -P checkpoints
+wget https://huggingface.co/IndexTeam/Index-TTS/resolve/main/unigram_12000.vocab -P checkpoints
 
-git clone https://hf-mirror.com/SparkAudio/Spark-TTS-0.5B pretrained_models/Spark-TTS-0.5B
 
 ```
-### 方式三：下载工具下载
+### 方式四：下载工具下载
 
 可以使用IDM等下载工具，在hf-mirror网站下载模型，对于大文件效果更好，速度刚刚的。
-
+在hf-mirror下载
 - https://hf-mirror.com/IndexTeam/Index-TTS/tree/main
+或者魔塔社区下载
+- https://modelscope.cn/models/IndexTeam/IndexTTS-1.5
 
 ## Command Line Tool
 ```bash
