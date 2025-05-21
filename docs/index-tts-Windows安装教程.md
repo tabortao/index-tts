@@ -53,6 +53,17 @@ micromamba create --name <new_env_name> --file requirements.txt
 micromamba create -p F:\Code\TTS\index-tts\py312 --file requirements.txt
 ```
 
+简洁安装依赖
+```bash
+# 参考https://github.com/index-tts/index-tts/issues/150，修改代码requirements.txt、setup.py、front.py
+micromamba create -p ./py312 python=3.12
+micromamba activate ./py312
+./py312/python.exe -m pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
+./py312/python.exe -m pip install -r requirements.txt
+./py312/python.exe -m pip install -e .
+./py312/python.exe webui.py
+```
+
 ## 下载模型
 ### 方式一：Modelscope下载推荐方式
 安装Modelscope SDK
