@@ -68,7 +68,7 @@ micromamba activate ./py312
 ### 方式一：Modelscope下载推荐方式
 安装Modelscope SDK
 ```bash
-pip install modelscope --index-url https://pypi.tuna.tsinghua.edu.cn/simple
+./py312/python.exe -m pip install modelscope --index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 在index-tts文件夹新建download_model.py, 粘贴如下内容并运行`python download_model.py`:
 
@@ -78,7 +78,7 @@ snapshot_download('IndexTeam/IndexTTS-1.5', local_dir='checkpoints/IndexTTS-1.5'
 ```
 使用Modelscope下载
 ```bash
-python download_model.py
+./py312/python.exe download_model.py
 ```
 
 ### 方式二：huggingface-cli下载
