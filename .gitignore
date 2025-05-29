@@ -12,5 +12,11 @@ checkpoints/Index-TTS/
 checkpoints/IndexTTS-1.5/
 outputs/
 build/
+<<<<<<< HEAD
 py312/
 *.7z
+=======
+*.py[cod]
+*.egg-info/
+.venv
+>>>>>>> 10d557a15e0bc234389a2900b7147c4c8a94fe3b
